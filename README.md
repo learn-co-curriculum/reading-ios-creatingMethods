@@ -33,7 +33,7 @@ Note that nothing is abbreviated in this method name. In Objective-C you will co
 
 The above method is an instance method. This is designated by the `-` in front of the method name.
 
-To refresh on the difference between a class / instance method, check our reading: [Intro To Objects](https://github.com/flatiron-school-curriculum/reading-ios-introToObjects#difference-between-an-instance-and-a-class).
+To refresh on the difference between a class / instance method, check our reading: [Intro To Objects](https://github.com/learn-co-curriculum/reading-ios-introToObjects#difference-between-an-instance-and-a-class).
 
 Clearly, the above method should be an instance method, as we would not want to add a specific integer number to the entire class, but rather to a specific instance of an `NSNumber`.
 
@@ -102,5 +102,5 @@ Methods may be, and often are, nested like so.
 
 ##Method invocation
 
-We give a short intro to method invocation (aka "calling a method", aka "sending a message") [here](https://github.com/flatiron-school-curriculum/reading-ios-introToObjects#difference-between-an-instance-and-a-class).
+We give a short intro to method invocation (aka "calling a method", aka "sending a message") [here](https://github.com/learn-co-curriculum/reading-ios-introToObjects#difference-between-an-instance-and-a-class).
 
