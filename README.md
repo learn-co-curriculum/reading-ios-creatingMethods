@@ -4,11 +4,11 @@
 
 A method can be described by its five parts:
 
-1) The method name
-2) Its type (instance or class)
-3) Its arguments (aka parameters)
-4) Its return type
-5) And its associated implementation
+1. The method name
+2. Its type (instance or class)
+3. Its arguments (aka parameters)
+4. Its return type
+5. And its associated implementation
 
 Let's take an example to get acquainted with methods.
 
