@@ -102,13 +102,13 @@ If you specify a return type (any type that isn't `void`), you must make sure to
 }
 ```
 ##### How Do I Use a Returned Value?
-To use a method's returned value, we can just put the call wherever we need that returned value to be. Let's use `pluralizeString` again:
+If a method returns a value, that means a value is the result of the method call (`[objectName methodName]`). So we can use a method call just like any other statement that has a value (such as `2 + 2` or `@"Hello"`). Let's use `pluralizeString` again:
 
 ````objc
 NSString *myPluralizedString = [exampleObject pluralizeString: @"cat"];
-// ^ now myPluralizedString == @"cats"
+// ^ now myPluralizedString is @"cats"
 ````
-Try and **visualize your method call to represent the value you expect it to return** (similar to variables). Don't worry if this doesn't click right away, it will make sense with more practice.
+Basically we can put the call wherever we would need its returned value. Try and **visualize your method call to represent the value you expect it to return**. Don't worry if this doesn't click right away, it will make sense with more practice.
 
 ##Associated Implementation (The Fifth Element!)
 
