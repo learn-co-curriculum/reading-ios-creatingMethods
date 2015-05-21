@@ -1,106 +1,125 @@
-#Creating methods
+#Breaking Down Methods
 
-##The four elements
+Methods in Objective-C may look a little intimidating at first, but all methods can be broken down into five parts:
 
-A method can be described by its five parts:
+1. **Name**
+2. Type: **instance** or **class**
+3. **Arguments** (aka parameters)
+4. **`return`** type 
+5. Associated Implementation ("**what does it actually do?**")
 
-1. The method name
-2. Its type (instance or class)
-3. Its arguments (aka parameters)
-4. Its return type
-5. And its associated implementation
+Let's use an example to get acquainted with methods.
 
-Let's take an example to get acquainted with methods.
+######Example
+```objc
+- (void) stripVowelsFromString: (NSString *) stringWithVowels {
+	
+	/* some code goes here to use 
+	the string that's passed in (stringWithVowels)
+		and remove its vowels. */
+}
+```
+##Method Name
+Our method's named `stripVowelsFromString:`. This is what you'd call it in a conversation, as well as *how* you'd call it in code. The `:` denotes that it *takes an argument*. We'll get into arguments later, but for now just know that a colon is part of the name and signifies that it needs some input to work.
+
+####Naming Conventions
+Note that nothing is abbreviated in this method name. In Objective-C you will come across and create very long method names. For example, you've been using `didFinishLaunchingWithOptions:` and thats a mouthful!
+
+Your method names should be descriptive, but *try* to be succinct. I say *try* because it's okay for them to be long — make them as long as you need them to be to get the point across! But also make sure they make sense to you, and really convey what the point is. If you **name your methods to have clear intentions**, your code will be more readable for future you and others. 
+
+####Auto-Complete
+You may ask, "but won't writing long method names steer us toward a typo-ridden hell?". **Fear not, XCode's got auto-complete.** Thanks to auto-complete, writing long methods is a *breeze*. Just starting typing the name of a method and you'll see it quickly rise to the top of the list of autocomplete options. Use the up/down arrows to scroll through the list once it appears.
+
+*Top-Tip: is the method you're looking for not showing up in auto-complete? Make sure you've started with a* `[` *and that you're in the correct scope.*
+
+##Method Type (Instance vs. Class)
+
+Every method definition begins with either a `-` (*instance*) or a `+` (*class*). Our example method is an instance method, because it starts with a `-`. To make our example a class method, it's as simple as replacing the `-` with a  `+` in it's definition.
+
+####Instance Methods
+
+Since our example is an instance method, it can only be **called by an instance of its class**. Imagine we wrote this in a custom class called `FISStringFormatter`. This is an instance method, so to call it we'd need to have an actual object ("*an instance of `FISStringFormatter`*") in the first place! 
+
+####Class Methods
+
+Conversely, a class method is **called by the Class itself**. When calling one, the class is the sender. As it turns out, you've been using a class method when you create an instance of a class! `[NSArray alloc]` look familiar? That calls the method `alloc` on the `NSArray` class.
+
+*For more on the difference between class / instance methods, check our reading: [Intro To Objects](https://github.com/learn-co-curriculum/reading-ios-introToObjects#difference-between-an-instance-and-a-class).*
+
+##Arguments
+
+We can pass information to a method via its arguments. To define a method argument, add a `:` followed by the argument's type in parentheses, and then a name for our argument. We can then refer to this argument in our code block by this name.
+
+######Example
+```objc
+- (void) logStringWithMuchEnthusiasm: (NSString *) stringToLog {
+	
+	// our argument is called 'stringToLog'
+	// in the definition, we just use it like a normal variable
+	NSLog(@"HEY! %@ !!!", stringToLog);
+}
+```
+When this gets called, `stringToLog` becomes whatever you pass into  the method. In the definition, the **argument is simply a placeholder**, allowing you to specify what's done with information a user passes in. 
+
+So if you called `[exampleObject logStringWithMuchEnthusiasm: @"I love iOS"]`, this method would simply replace `stringToLog` with your inputted string and log `"HEY! I love iOS !!!"`. 
+
+####Multiple Arguments
+Methods may also have multiple arguments. In objective-C, that means adding more to the name *after* an argument. Let's create a method which takes both a string and an integer. It looks like this: 
 
 ######Example
 ```objc
 
-- (void)addIntegerNumber:(NSNumber *)integerNumberToAdd {
-	
-	//some code goes here to implement the addition of an integer with another number.
-
+- (void) logString: (NSString *)stringToLog WithInteger: (NSInteger)integerToLog {
+	// code that logs both arguments in some interesting way
 }
-
 ```
+So this method's name is `logString:WithInteger:`. From the name you can tell there are two arguments because there are two `:`. 
 
-###Method name
+In it's definition, notice how we have the `:` and specify our first argument's type and name. Then, the method name continues on (`WithInteger:`), specifying that theres another argument. There is no limit on how many arguments a method may have, *but don't shove too much into a single method!*.
 
-Here we are looking at a method named `addIntegerNumber:`. We traditionally refer to the name of the method without it's arguments (that which comes after the colons) or its return types. In fact, you'll often see the name of the method referred to in code as the selector. Or in this case, to be more specific `@selector(addIntegerNumber:)`.
+##Return Type
 
-Note that nothing is abbreviated in this method name. In Objective-C you will come across very long method names, unlike other languages. XCode's autocomplete feature comes in very handy as a result. Starting typing the name of a method and you'll see it quickly rise to the top of the list of autocomplete options.
+In the examples, our methods have begun with `- (void)`. We know what the `-` is for (method type), but what's up with that second part? This is where we specify our method's return type. **Return type is how a method indicates what its output is**. 
 
-###Method type
+So we can put any type necessary in that first parenthesis, and it would mean our method *must* output that type in order to run. If it doesn't, you'll raise a compiler error and your program will not build. 
 
-The above method is an instance method. This is designated by the `-` in front of the method name.
+#####`(void)`
 
-To refresh on the difference between a class / instance method, check our reading: [Intro To Objects](https://github.com/learn-co-curriculum/reading-ios-introToObjects#difference-between-an-instance-and-a-class).
+You'll see and use this frequently in method definitions. `void` is from C and means "nothing" (though not to be confused with `nil`). So if you make `void` your method's return type, that means "this method doesn't return anything". This also means you don't need a `return` statement in your method. Use this whenever you feel that a method doesn't need any output. 
 
-Clearly, the above method should be an instance method, as we would not want to add a specific integer number to the entire class, but rather to a specific instance of an `NSNumber`.
+##### How Do I `return`?
 
-###Arguments
-
-We can pass information to a method via its arguments. We designate a method has an argument with the `:`, followed by the argument's type in parentheses, and then a name for our argument. We can then refer to this argument in our code block by this name.
+If we specify a return type (any type that isn't `void`), we must make sure to declare `return _______;`, where the blank is data of whatever type you specified. Again, the variable / value must be of the type specified as the return type in our method name! Otherwise your code will not be able to run. 
 
 ######Example
 ```objc
-
-- (void)addIntegerNumber:(NSNumber *)integerNumberToAdd {
+-(NSString *) pluralizeString:(NSString *) stringToPluralize {
 	
-	NSInteger convertedNumberToInteger = [integerNumberToAdd integerValue];
+	// we'll just add 's' for example's sake
+	NSString *outputString = [NSString stringWithFormat: @"%@s", stringToPluralize]; 
 
-	// more code to make this method work
-	...
-
+	return outputString;
 }
 ```
+##### How Do I Use a Returned Value?
+To use a method's returned value, we can just put the call wherever we need that returned value to be. Let's use `pluralizeString` again:
 
-Methods may also have multiple arguments.
+````objc
+NSString *myPluralizedString = [exampleObject pluralizeString: @"cat"];
+// ^ now myPluralizedString == @"cats"
+````
+Try and **visualize your method call to represent the value you expect it to return** (similar to variables). Don't worry if this doesn't click right away, it will make sense with more practice.
 
-######Example
-```objc
+##Associated Implementation (The Fifth Element!)
 
-- (void)operation:(NSString *)operationType WithNumber:(NSNumber *) {
-	
-	//Write some code to take any operation (e.g. addition, subtraction, multiplication, etc.) and do that with an NSNumber
-}
-```
+*Obviously* a method needs code inside that does the darn thing, but we couldn't just ignore the fact. Most of the examples leave this up to your imagination, but a method could also be as little as 1-3 lines — above all else, methods are here for **convenience**. They exist so we don't have to constantly implement the same stuff over and over again in our program! Here's a few tips for good method implementation:
 
-In this case our selector (aka method name) would be `operation:WithNumber:`.
+   * **A method should do one thing and do it well**. "One thing" is almost always up for interpretation, but try and make your methods as simple as possible.
+   * **Implement methods clearly** — use however many lines, comments or variables you need so that someone who's never seen it before can understand whats going on under the hood. Take care of future you.
+   * **If you find yourself doing the same process** over and over again (three times or more~), you should probably just write a method.
 
-###Return type
+*Remember that these are tips, not rules!*
 
-In all of the examples presented so far, our methods have begun with a `-` and then the word `void` in parentheses. This is where we indicate the return type of our method. Do we want the result of our method to be passed back to the point at which we called the method? If so, we must include a return type. If not, we can use `void`.
-
-Additionally if we want to return a result, we must make sure to declare `return` (and the variable / value we want to return) within our method. Don't forget that the returned variable / value must be of the type specified by the return type in our method name! (In our example, that would be an `NSNumber`.)
-
-######Example
-```objc
--(NSNumber *)addIntegerNumber:(NSNumber *)integerNumberToAdd {
-	
-	NSNumber *computedResult;
-
-	//some code goes here to implement the addition of an integer with another number using computedResult
-
-	return computedResult;
-}
-```
-
-###Associated implementation
-
-The fact that a method has an associated implementation is rather self-evident, but to be complete, we must ensure that a method has some associated code block that defines what it does. In all of our above examples, we have left most of the code block to your imagination.
-
-
-###Nested method calls
-
-Methods may be, and often are, nested like so.
-
-```objc
-
-[[self.ourNumber addIntegerNumber:@5] addIntegerNumber:@10];
-
-```
-
-##Method invocation
-
-We give a short intro to method invocation (aka "calling a method", aka "sending a message") [here](https://github.com/learn-co-curriculum/reading-ios-introToObjects#difference-between-an-instance-and-a-class).
+##Method Invocation
+If you need a refresher on method invocation (aka "calling a method", or "sending a message"), check out our reading: [Using Methods](https://github.com/learn-co-curriculum/reading-ios-using-methods).
 
