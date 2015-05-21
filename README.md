@@ -38,11 +38,11 @@ Every method definition begins with either a `-` (*instance*) or a `+` (*class*)
 
 ####Instance Methods
 
-Since our example is an instance method, it can only be **called by an instance of its class**. Imagine we wrote this in a custom class called `FISStringFormatter`. This is an instance method, so to call it we'd need to have an actual object ("*an instance of `FISStringFormatter`*") in the first place! 
+Since our example is an instance method, it can only be **called on an instance of its class**. Imagine we wrote this in a custom class called `FISStringFormatter`. This is an instance method, so to call it we'd need to have an actual object ("*an instance of `FISStringFormatter`*") in the first place! 
 
 ####Class Methods
 
-Conversely, a class method is **called by the Class itself**. When calling one, the class is the sender. As it turns out, you've been using a class method when you create an instance of a class! `[NSArray alloc]` look familiar? That calls the method `alloc` on the `NSArray` class.
+Conversely, a class method is **called on the Class itself**. When calling one, the class is the sender. As it turns out, you've been using a class method when you create an instance of a class! `[NSArray alloc]` look familiar? That calls the method `alloc` on the `NSArray` class.
 
 *For more on the difference between class / instance methods, check our reading: [Intro To Objects](https://github.com/learn-co-curriculum/reading-ios-introToObjects#difference-between-an-instance-and-a-class).*
 
@@ -64,18 +64,18 @@ When this gets called, `stringToLog` becomes whatever you pass into  the method.
 So if you called `[exampleObject logStringWithMuchEnthusiasm: @"I love iOS"]`, this method would simply replace `stringToLog` with your inputted string and log `"HEY! I love iOS !!!"`. 
 
 ####Multiple Arguments
-Methods may also have multiple arguments. In objective-C, that means adding more to the name *after* an argument. Let's create a method which takes both a string and an integer. It looks like this: 
+Methods may also have multiple arguments. In Objective-C, that means adding more to the name *after* an argument. Let's create a method which takes both a string and an integer. It looks like this: 
 
 ######Example
 ```objc
 
-- (void) logString: (NSString *)stringToLog WithInteger: (NSInteger)integerToLog {
+- (void) logString: (NSString *)stringToLog withInteger: (NSInteger)integerToLog {
 	// code that logs both arguments in some interesting way
 }
 ```
-So this method's name is `logString:WithInteger:`. From the name you can tell there are two arguments because there are two `:`. 
+So this method's name is `logString:withInteger:`. From the name you can tell there are two arguments because there are two `:`. 
 
-In it's definition, notice how we have the `:` and specify our first argument's type and name. Then, the method name continues on (`WithInteger:`), specifying that theres another argument. There is no limit on how many arguments a method may have, *but don't shove too much into a single method!*.
+In it's definition, notice how we have the `:` and specify our first argument's type and name. Then, the method name continues on (`withInteger:`), specifying that theres another argument. There is no limit on how many arguments a method may have, *but don't shove too much into a single method!*.
 
 ##Return Type
 
@@ -85,11 +85,11 @@ So we can put any type necessary in that first parenthesis, and it would mean ou
 
 #####`(void)`
 
-You'll see and use this frequently in method definitions. `void` is from C and means "nothing" (though not to be confused with `nil`). So if you make `void` your method's return type, that means "this method doesn't return anything". This also means you don't need a `return` statement in your method. Use this whenever you feel that a method doesn't need any output. 
+You'll see and use this frequently in method definitions. `void` is from C and means "nothing" (not to be confused with `nil`; void is a *type*, while nil is a *value*). So if you make `void` your method's return type, that means "this method doesn't return anything". This also means you don't need a `return` statement in your method. Use this whenever you feel that a method doesn't need any output. 
 
 ##### How Do I `return`?
 
-If we specify a return type (any type that isn't `void`), we must make sure to declare `return _______;`, where the blank is data of whatever type you specified. Again, the variable / value must be of the type specified as the return type in our method name! Otherwise your code will not be able to run. 
+If you specify a return type (any type that isn't `void`), you must make sure to end your method with `return _______;`, where the blank is data of whatever type you specified. Again, the variable / value must be of the type specified as the return type in our method name! Otherwise your code will not be able to run.
 
 ######Example
 ```objc
@@ -112,7 +112,9 @@ Try and **visualize your method call to represent the value you expect it to ret
 
 ##Associated Implementation (The Fifth Element!)
 
-*Obviously* a method needs code inside that does the darn thing, but we couldn't just ignore the fact. Most of the examples leave this up to your imagination, but a method could also be as little as 1-3 lines — above all else, methods are here for **convenience**. They exist so we don't have to constantly implement the same stuff over and over again in our program! Here's a few tips for good method implementation:
+*Obviously* a method needs code inside that does the darn thing, but we couldn't just ignore the fact.
+
+Most of the examples leave implementation up to your imagination, but a method could be as simple as 2 lines — above all else, methods are here for **convenience**. They exist so we don't have to implement the same stuff over and over again in our program! Here's a few tips for good method implementation:
 
    * **A method should do one thing and do it well**. "One thing" is almost always up for interpretation, but try and make your methods as simple as possible.
    * **Implement methods clearly** — use however many lines, comments or variables you need so that someone who's never seen it before can understand whats going on under the hood. Take care of future you.
