@@ -6,7 +6,7 @@ Methods in Objective-C may look a little intimidating at first, but all methods 
 2. Type: **instance** or **class**
 3. **Arguments** (aka parameters)
 4. **`return`** type 
-5. Associated Implementation ("**what does it actually do?**")
+5. Associated implementation ("**what does it actually do?**")
 
 Let's use an example to get acquainted with methods.
 
@@ -20,7 +20,7 @@ Let's use an example to get acquainted with methods.
 }
 ```
 ##Method Name
-Our method's named `stripVowelsFromString:`. This is what you'd call it in a conversation, as well as *how* you'd call it in code. The `:` denotes that it *takes an argument*. We'll get into arguments later, but for now just know that a colon is part of the name and signifies that it needs some input to work.
+Our method is named `stripVowelsFromString:`. This is what you'd call it in a conversation, as well as *how* you'd call it in code. The `:` denotes that it *takes an argument*. We'll get into arguments later, but for now just know that a colon is part of the name and signifies that it needs some input to work.
 
 ####Naming Conventions
 Note that nothing is abbreviated in this method name. In Objective-C you will come across and create very long method names. For example, you've been using `didFinishLaunchingWithOptions:` and thats a mouthful!
@@ -44,7 +44,7 @@ Since our example is an instance method, it can only be **called on an instance 
 
 Conversely, a class method is **called on the Class itself**. When calling one, the class is the sender. As it turns out, you've been using a class method when you create an instance of a class! `[NSArray alloc]` look familiar? That calls the method `alloc` on the `NSArray` class.
 
-*For more on the difference between class / instance methods, check our reading: [Intro To Objects](https://github.com/learn-co-curriculum/reading-ios-introToObjects#difference-between-an-instance-and-a-class).*
+*For more on the difference between class / instance methods, check the "Difference between an Instance and a Class" section in [this reading](https://learn.co/lessons/621).*
 
 ##Arguments
 
@@ -123,5 +123,5 @@ Most of the examples leave implementation up to your imagination, but a method c
 *Remember that these are tips, not rules!*
 
 ##Method Invocation
-If you need a refresher on method invocation (aka "calling a method", or "sending a message"), check out our reading: [Using Methods](https://github.com/learn-co-curriculum/reading-ios-using-methods).
+If you need a refresher on method invocation (aka "calling a method", or "sending a message"), check out our reading: [Using Methods](https://learn.co/lessons/606).
 
