@@ -24,9 +24,9 @@ From left to right these are:
 
 **Note:** *Remember, not all methods supply a return or require arguments.*
 
-As you should recall, a **method** is a behavior that an **object** can perform upon itself. Methods are the action sequences of our code. The ability to write custom methods is one of the primary elements of programming that makes it a flexible tool for solving a wide variety of problems.
+As you should recall, a **method** is a behavior that an **object** can perform upon itself. Methods are the action sequences of our code. The ability to write custom methods is one of the primary elements of structured programming that makes it a flexible tool for solving a wide variety of problems. Fundamentally, methods allow us to run the exact same section of code multiple times from pretty much anywhere within our application that we wish.
 
-The real beauty of methods lies in not needing to understand all of the ins-and-outs of how any single method works in order to use it. Sure, we need to understand *what* the method does in order to apply it appropriately, but that's a far cry from knowing its inner workings. A helpful image is of using a common applicance like a vending machine: you don't need a degree in mechanical engineering in order to trade a handful of coins for a soda—you simply need to meet the input requirements ($1.25 in change) and understand its interface (press a button).
+The real beauty of methods lies in not needing to understand all of the ins-and-outs of how any single method works in order to apply that method to given circumstance. Sure, we need to understand *what* the method does in order to apply it appropriately, but that's a far cry from knowing its inner workings. A helpful image is of using a common applicance like a vending machine: you don't need a degree in mechanical engineering in order to trade a handful of coins for a soda—you simply need to meet the input requirements ($1.25 in change) and understand its interface (press a button).
 
 But how does exactly does the vending machine accept the payment, receive the instruction, and return the correct result? Well, that's the job of the designer to figure out!
 
