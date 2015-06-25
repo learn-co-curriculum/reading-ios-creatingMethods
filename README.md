@@ -1,127 +1,212 @@
-#Breaking Down Methods
+# Writing Methods
 
-Methods in Objective-C may look a little intimidating at first, but all methods can be broken down into five parts:
+## Objectives
 
-1. **Name**
-2. Type: **instance** or **class**
-3. **Arguments** (aka parameters)
-4. **`return`** type 
-5. Associated implementation ("**what does it actually do?**")
+1. Review the steps to calling methods.
+2. Know the syntax for declaring methods.
+3. Recognize when to declare methods as either private or public and how to do so in Objective-C.
+4. Be able to write a method body.
+5. Know where to place `return` in the method body.
 
-Let's use an example to get acquainted with methods.
+## Review: Calling A Method
 
-######Example
+In the earlier reading about calling methods, we discussed the four elements of making a method call:
+
 ```objc
-- (void) stripVowelsFromString: (NSString *) stringWithVowels {
-	
-	/* some code goes here to use 
-	the string that's passed in (stringWithVowels)
-		and remove its vowels. */
+ReturnType *captureVariable = [recipientObject methodNameArgument:argumentVariable];
+```
+From left to right these are:
+
+1. The variable of the correct type used to capture the return,
+2. The name of the object to perform the method,
+3. The name of the method being called, and
+4. The names of any objects submitted to the methods as arguments. 
+
+**Note:** *Remember, not all methods supply a return or require arguments.*
+
+As you should recall, a **method** is a behavior that an **object** can perform upon itself. Methods are the action sequences of our code. The ability to write custom methods is one of the primary elements of structured programming that makes it a flexible tool for solving a wide variety of problems. Fundamentally, methods allow us to run the exact same section of code multiple times from pretty much anywhere within our application that we wish.
+
+The real beauty of methods lies in not needing to understand all of the ins-and-outs of how any single method works in order to apply that method to given circumstance. Sure, we need to understand *what* the method does in order to apply it appropriately, but that's a far cry from knowing its inner workings. A helpful image is of using a common applicance like a vending machine: you don't need a degree in mechanical engineering in order to trade a handful of coins for a soda—you simply need to meet the input requirements ($1.25 in change) and understand its interface (press a button).
+
+But how does exactly does the vending machine accept the payment, receive the instruction, and return the correct result? Well, that's the job of the designer to figure out!
+
+## Method Anatomy 201
+
+Before we dive into writing a method from scratch, let's reference an existing method to get acquainted with the practice. While there are four elements to a method call, there is a fifth element to composing a new one (and no—it isn't Milla Jovovich). All together, they are:
+
+1. **Instance or Class Indicator:** respectively the `-` or `+` at the beginning of the line,
+2. **Return Type:** the class within the `(``)` ("parentheses") which is the kind of instance variable that the method will result to,
+3. **Method Name:** a description of what the method does, which may contain:
+4. (optional) **Arguments:** instance variables to be passed into the method which are relevant to its operation, and
+5. **Method Body:** the set of instructions that calling the method executes.
+
+As an example of a method definition, let's look at the `AppDelegate`'s `application:didFinishLaunchingWithOptions:` method:
+
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Override point for customization after application launch.
+
+    return YES;
 }
 ```
-##Method Name
-Our method is named `stripVowelsFromString:`. This is what you'd call it in a conversation, as well as *how* you'd call it in code. The `:` denotes that it *takes an argument*. We'll get into arguments later, but for now just know that a colon is part of the name and signifies that it needs some input to work.
+**Note:** *You'll notice that Apple's methods are written in camel case. This is considered standard practice and you should follow it. Notice also that the continuation of the method name following the first argument* `application:` *resumes in camel case beginning with a* ***lowercase*** *letter,* `didFinishLaunchingWithOptions:`. *Resuming a method declaration in capital case is regarded as bad style and should be avoided.* 
 
-####Naming Conventions
-Note that nothing is abbreviated in this method name. In Objective-C you will come across and create very long method names. For example, you've been using `didFinishLaunchingWithOptions:` and thats a mouthful!
+Let's review each element of this method:
 
-Your method names should be descriptive, but *try* to be succinct. I say *try* because it's okay for them to be long — make them as long as you need them to be to get the point across! But also make sure they make sense to you, and really convey what the point is. If you **name your methods to have clear intentions**, your code will be more readable for future you and others. 
+1. The `-` ("dash") immediately tells us that this is an instance method and not a class method. (We'll cover class methods in a later topic on inheritance.) For the time being, any methods that we direct you to write will be instance methods, but the `-` symbol is an important signal to the compiler that you're beginning a method declaration or definition, so don't forget it.
 
-####Auto-Complete
-You may ask, "but won't writing long method names steer us toward a typo-ridden hell?". **Fear not, XCode's got auto-complete.** Thanks to auto-complete, writing long methods is a *breeze*. Just starting typing the name of a method and you'll see it quickly rise to the top of the list of autocomplete options. Use the up/down arrows to scroll through the list once it appears.
+2. We also know pretty quickly that this method returns a `BOOL` value, the purpose of which we can infer from the method name that it is meant to represent whether or not the method has been called and completed.
 
-*Top-Tip: is the method you're looking for not showing up in auto-complete? Make sure you've started with a* `[` *and that you're in the correct scope.*
+3. Method names sometimes take a little deciphering. Herein lies the value of descriptive and appropriate naming styles. We can infer from this name that, in the life cycle of the `AppDelegate` instance, this method is called implicitly *after* the application has launched. The past tense verb "did" is an indicator of the `BOOL` return value (it is phrased as answer a yes or no question). And, the argument descriptors are appropriate to the expected input objects.
 
-##Method Type (Instance vs. Class)
+4. The arguments, you'll notice, are in two elements: a type and a name. The argument type tells us what class of variable is expected, and the argument name tells us what will be the internal name of the variable passed into the argument when the method is called. In the above case, two arguements are expected: a `UIApplication` object internally named `application`, and an `NSDictionary` of options internally named `launchOptions` (the use of the plural is a clue that this is a collection). 
 
-Every method definition begins with either a `-` (*instance*) or a `+` (*class*). Our example method is an instance method, because it starts with a `-`. To make our example a class method, it's as simple as replacing the `-` with a  `+` in it's definition.
+5. The method body contained inside the curly braces (`{``}`), which contains the instructions for how the method should go about doing what its meant to do. Since this method says it returns a `BOOL` value, we need to end the method with a `return` statement with a `BOOL`—in this case, a `YES`.
 
-####Instance Methods
+That's how we can read a method definition that's already been built. Now we're going to walk through the steps of creating our own method from scratch.
 
-Since our example is an instance method, it can only be **called on an instance of its class**. Imagine we wrote this in a custom class called `FISStringFormatter`. This is an instance method, so to call it we'd need to have an actual object ("*an instance of `FISStringFormatter`*") in the first place! 
+## Declaring A Method
 
-####Class Methods
+Every Objective-C class exists in two separate files, the "**header**" file with the extention `*.h` and the "**implementation**" file with the extension `*.m`. The first step in writing a custom method is to **declare** the method in the header file and then **define** it in the implementation file.
 
-Conversely, a class method is **called on the Class itself**. When calling one, the class is the sender. As it turns out, you've been using a class method when you create an instance of a class! `[NSArray alloc]` look familiar? That calls the method `alloc` on the `NSArray` class.
+**Advanced:** *Methods don't actually need to be declared in the header file in order to work. Doing so makes them accessible to other classes and enables Xcode's autocomplete function to work. Autocomplete is an important tool for both avoiding bugs caused by typos and for double-checking that the compiler is correctly aware of whatever thing you're typing.*
 
-*For more on the difference between class / instance methods, check the "Difference between an Instance and a Class" section in [this reading](https://learn.co/lessons/621).*
+Method declarations are placed between the `@interface` and `@end` markers of the header and contain only the first four elements of the method—that is everything except the body—and end with a semicolon (`;`) like a property declaration.
 
-##Arguments
+#### Example:
 
-We can pass information to a method via its arguments. To define a method argument, add a `:` followed by the argument's type in parentheses, and then a name for our argument. We can then refer to this argument in our code block by this name.
+In the header file for our example class `FISVendingMachine`, let's declare an instance method that's going to accept a selection (an integer) and a payment amount (also an integer) as arguments and then return a soda (in the form of a string). Let's be sure to give it a descriptive name:
 
-######Example
 ```objc
-- (void) logStringWithMuchEnthusiasm: (NSString *) stringToLog {
-	
-	// our argument is called 'stringToLog'
-	// in the definition, we just use it like a normal variable
-	NSLog(@"HEY! %@ !!!", stringToLog);
+@interface FISVendingMachine : NSObject
+
+- (NSString *)deliverSodaForSelection:(NSUInteger)selection withPaymentInCents:(NSUInteger)paymentInCents;
+
+@end
+```
+Great! Now lets switch to the implementation file and define the method.
+
+## Defining A Method
+
+Declaring a method is just giving it a name. To actually write out the instructions that it's meant to represent, however, is the heart of the problem and is what gives the method life.
+
+In the implementation file, similar to the `@interface` and `@end` markers in the header file, the method definition must be placed between the `@implementation` and the `@end`. If you've declared the method name in the header file, autocomplete should offer up it up once you start typing its name. If it doesn't, then this may be an indicator that your method hasn't been correctly declared.
+
+Instead of ending the statement with a `;`, however, we're going to follow the method name with a pair of curly braces `{``}` which will enclose the instructions that we want the method to perform.
+
+**Tip-tip:** *Keep close track of your closing curly braces* `}`. *If you unconsciously begin defining a new method before properly closing the previous method, the compiler will get very confused and generate a slew of errors, possibly even saying that it can't find the* `@end` *marker for the file. Mind those curly braces!*
+
+#### Example: `FISVendingMachine`
+
+Defining our custom method on our `FISVendingMachine` class will begin like this:
+
+```objc
+@implementation
+
+- (NSString *)deliverSodaForSelection:(NSUInteger)selection withPaymentInCents:(NSUInteger)paymentInCents {
+	return nil;
+}
+
+@end
+```
+**Note:** *When writing a method with a return type, it is acceptable to start with just a* `return nil;` *return statement in order to silence the compiler error while you work on the method. Just be careful that you don't forget to change this to return your found result.*
+
+Let's get into it by first defining some internal variables for the sodas in stock (as an array of strings) and the cost of a soda (as an integer). Let's also set the `return` statement to pass back a default string so that it isn't returning `nil`:
+
+```objc
+- (NSString *)deliverSodaForSelection:(NSUInteger)selection withPaymentInCents:(NSUInteger)paymentInCents {
+
+    NSArray *stock = @[ @"Swizzle Soda",
+                        @"Mr. Fizz",
+                        @"Buzz Doctor",
+                        @"De Bug Beer",
+                        @"Moth Machine!",
+                        @"Liquid Ice"     ];
+    
+    NSUInteger costInCents = 125;
+
+	return @"Test Soda";
 }
 ```
-When this gets called, `stringToLog` becomes whatever you pass into  the method. In the definition, the **argument is simply a placeholder**, allowing you to specify what's done with information a user passes in. 
+Great! Now we have our inventory and our cost set up for us to utilize.
 
-So if you called `[exampleObject logStringWithMuchEnthusiasm: @"I love iOS"]`, this method would simply replace `stringToLog` with your inputted string and log `"HEY! I love iOS !!!"`. 
+Let's figure out how to access the stock and return the correct soda for the selection. Our interface designer has told us that the vending machine has buttons "1" through "6". Most humans prefer to count from one—not zero like computers (and programmers). We'll have to handle this discrepancy in our method body, otherwise we'll produce one kind of what's called an "off by one" error.
 
-####Multiple Arguments
-Methods may also have multiple arguments. In Objective-C, that means adding more to the name *after* an argument. Let's create a method which takes both a string and an integer. It looks like this: 
+Knowing this, we can simply access the `stock` array by using `selection` minus one to index it. We can capture the return from this into a string variable named `soda`. Let's write this out: 
 
-######Example
 ```objc
+- (NSString *)deliverSodaForSelection:(NSUInteger)selection withPaymentInCents:(NSUInteger)paymentInCents {
 
-- (void) logString: (NSString *)stringToLog withInteger: (NSInteger)integerToLog {
-	// code that logs both arguments in some interesting way
+    NSArray *stock = @[ @"Swizzle Soda",
+                        @"Mr. Fizz",
+                        @"Buzz Doctor",
+                        @"De Bug Beer",
+                        @"Moth Machine!",
+                        @"Liquid Ice"     ];
+    
+    NSUInteger costInCents = 125;
+
+    NSString *soda = stock[selection - 1];
+    
+    return @"Test Soda";
 }
 ```
-So this method's name is `logString:withInteger:`. From the name you can tell there are two arguments because there are two `:`. 
+Now that we've accessed the correct soda, we can return that instead of our test string:
 
-In it's definition, notice how we have the `:` and specify our first argument's type and name. Then, the method name continues on (`withInteger:`), specifying that theres another argument. There is no limit on how many arguments a method may have, *but don't shove too much into a single method!*.
-
-##Return Type
-
-In the examples, our methods have begun with `- (void)`. We know what the `-` is for (method type), but what's up with that second part? This is where we specify our method's return type. **Return type is how a method indicates what its output is**. 
-
-So we can put any type necessary in that first parenthesis, and it would mean our method *must* output that type in order to run. If it doesn't, you'll raise a compiler error and your program will not build. 
-
-#####`(void)`
-
-You'll see and use this frequently in method definitions. `void` is from C and means "nothing" (not to be confused with `nil`; void is a *type*, while nil is a *value*). So if you make `void` your method's return type, that means "this method doesn't return anything". This also means you don't need a `return` statement in your method. Use this whenever you feel that a method doesn't need any output. 
-
-##### How Do I `return`?
-
-If you specify a return type (any type that isn't `void`), you must make sure to end your method with `return _______;`, where the blank is data of whatever type you specified. Again, the variable / value must be of the type specified as the return type in our method name! Otherwise your code will not be able to run.
-
-######Example
 ```objc
--(NSString *) pluralizeString:(NSString *) stringToPluralize {
-	
-	// we'll just add 's' for example's sake
-	NSString *outputString = [NSString stringWithFormat: @"%@s", stringToPluralize]; 
-
-	return outputString;
+...
+    return soda;
 }
 ```
-##### How Do I Use a Returned Value?
-If a method returns a value, that means a value is the result of the method call (`[objectName methodName]`). So we can use a method call just like any other statement that has a value (such as `2 + 2` or `@"Hello"`). Let's use `pluralizeString` again:
+Our method will now return the customer's desired soda. Good job! We're not done just yet, though. We still need to incorporate a check that the customer paid the correct amount.
 
-````objc
-NSString *myPluralizedString = [exampleObject pluralizeString: @"cat"];
-// ^ now myPluralizedString is @"cats"
-````
-Basically we can put the call wherever we would need its returned value. Try and **visualize your method call to represent the value you expect it to return**. Don't worry if this doesn't click right away, it will make sense with more practice.
+### Multiple `return` Statements
 
-##Associated Implementation (The Fifth Element!)
+The `return` statement passes back the final result of the method. A method body can actually contain any number of `return` statements. However, any code following the first `return` statement that executes *will not get run* during that call because the method has already concluded itself. This is relevant because a method can have multiple patterns of resolution based upon context. It's especially useful for checking that the submitted arguments are valid inputs.
 
-*Obviously* a method needs code inside that does the darn thing, but we couldn't just ignore the fact.
+Let's use a second, albeit earlier, return statement to tell the customer if they haven't supplied enough payment. If we nest this second return statement inside of an `if` statement, it will only run if the check fails (or in terms of the `BOOL`, if it's positive for an error).
 
-Most of the examples leave implementation up to your imagination, but a method could be as simple as 2 lines — above all else, methods are here for **convenience**. They exist so we don't have to implement the same stuff over and over again in our program! Here's a few tips for good method implementation:
+```objc
+- (NSString *)deliverSodaForSelection:(NSUInteger)selection withPaymentInCents:(NSUInteger)paymentInCents {
+    
+    NSArray *stock = @[ @"Swizzle Soda",
+                        @"Mr. Fizz",
+                        @"Buzz Doctor",
+                        @"De Bug Beer",
+                        @"Moth Machine!",
+                        @"Liquid Ice"     ];
+    
+    NSUInteger costInCents = 125;
+    
+    if (paymentInCents < costInCents) {
+        return @"Insufficient payment."
+    }
+    
+    NSString *soda = stock[selection - 1];
+    
+    return soda;
+}
+```
+Now if our method is called and supplied a payment amount below `125`, a soda won't be returned, but rather an "error" message will read out.
 
-   * **A method should do one thing and do it well**. "One thing" is almost always up for interpretation, but try and make your methods as simple as possible.
-   * **Implement methods clearly** — use however many lines, comments or variables you need so that someone who's never seen it before can understand whats going on under the hood. Take care of future you.
-   * **If you find yourself doing the same process** over and over again (three times or more~), you should probably just write a method.
+**Advanced:** *The* `NSError` *class is designed specifically for passing error messages around. This is significantly more advanced than the current topic so we're just using* `NSString` *to keep the example simple.*
 
-*Remember that these are tips, not rules!*
+## Calling Your Custom Method
 
-##Method Invocation
-If you need a refresher on method invocation (aka "calling a method", or "sending a message"), check out our reading: [Using Methods](https://learn.co/lessons/606).
+Now that we've finished writing our custom method, we can call it elsewhere in our code just like any other method (so long as our custom class `FISVendingMachine` has been properly imported):
+
+```objc
+FISVendingMachine *vendOMatic = [[FISVendingMachine alloc] init];
+    
+NSString *soda = [vendOMatic deliverSodaForSelection:1 
+                                  withPaymentInCents:125];
+    
+NSLog(@"%@", soda);
+```
+This will print: `Swizzle Soda`.
+
+Now anyone with access to a `FISVendingMachine` object can call our `deliverSodaForSelection:withPaymentInCents:` method and get a soda without knowing how our custom method works internally.
+
+ Mmmm... swizzlin'.
+
 
