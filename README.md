@@ -84,6 +84,8 @@ In the header file for our example class `FISVendingMachine`, let's declare an i
 
 @end
 ```
+**Note:** *Usage of the* `*` *("star") symbol in method declarations and definitions follows the same convention as declaring variables of that type anywhere in the code. Above, the* `NSString` *return type uses a* `*` *because it is an object variable, while the two* `NSUInteger` *arguments do not because they are primitive variables.*
+
 Great! Now lets switch to the implementation file and define the method.
 
 ## Defining A Method
