@@ -28,7 +28,7 @@ As you should recall, a **method** is a behavior that an **object** can perform 
 
 The real beauty of methods lies in not needing to understand all of the ins-and-outs of how any single method works in order to apply that method to given circumstance. Sure, we need to understand *what* the method does in order to apply it appropriately, but that's a far cry from knowing its inner workings. A helpful image is of using a common applicance like a vending machine: you don't need a degree in mechanical engineering in order to trade a handful of coins for a soda—you simply need to meet the input requirements ($1.25 in change) and understand its interface (press a button).
 
-But how does exactly does the vending machine accept the payment, receive the instruction, and return the correct result? Well, that's the job of the designer to figure out!
+But how exactly does the vending machine accept the payment, receive the instruction, and return the correct result? Well, that's the job of the designer to figure out!
 
 ## Method Anatomy 201
 
