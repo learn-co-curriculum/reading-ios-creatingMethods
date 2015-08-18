@@ -92,7 +92,7 @@ Great! Now lets switch to the implementation file and define the method.
 
 Declaring a method is just giving it a name. To actually write out the instructions that it's meant to represent, however, is the heart of the problem and is what gives the method life.
 
-In the implementation file, similar to the `@interface` and `@end` markers in the header file, the method definition must be placed between the `@implementation` and the `@end`. If you've declared the method name in the header file, autocomplete should offer up it up once you start typing its name. If it doesn't, then this may be an indicator that your method hasn't been correctly declared.
+In the implementation file, similar to the `@interface` and `@end` markers in the header file, the method definition must be placed between the `@implementation` and the `@end`. If you've declared the method name in the header file, autocomplete should offer it up once you start typing its name. If it doesn't, then this may be an indicator that your method hasn't been correctly declared.
 
 Instead of ending the statement with a `;`, however, we're going to follow the method name with a pair of curly braces `{``}` which will enclose the instructions that we want the method to perform.
 
